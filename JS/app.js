@@ -2,6 +2,7 @@
 
 //global variables
 const rootElement = document.getElementById('product-images');
+//static for now...guessing these will be variables later
 const numberOfRounds = 25;
 const numberOfImagesPerRound = 3;
 
@@ -79,7 +80,7 @@ function displayVotingResults() {
   for (var i = 0; i < allProductImages.length; i++)
   {
     var newParaEl = document.createElement('p');
-    newParaEl.innerText = `${allProductImages[i].productName} had ${allProductImages[i].votes} votes and was shown ${allProductImages[i].views} times`;
+    newParaEl.innerText = `${allProductImages[i].productName} had ${allProductImages[i].votes} votes and was shown ${allProductImages[i].views} times.`;
     rootElement.appendChild(newParaEl);
     rootElement.appendChild(document.createElement('br'));
   }
@@ -123,6 +124,20 @@ new ProductImage('Tablet-TP-Stand', 'IMG/bathroom.jpg');
 new ProductImage('Toeless-Bootes', 'IMG/boots.jpg');
 new ProductImage('All-in-One-Breakfast', 'IMG/breakfast.jpg');
 new ProductImage('Meatball-Bubblegum', 'IMG/bubblegum.jpg');
+new ProductImage('Unsittable-Chair', 'IMG/chair.jpg');
+new ProductImage('Cthulhu', 'IMG/cthulhu.jpg');
+new ProductImage('Duck-Mask-For-Dogs', 'IMG/dog-duck.jpg');
+new ProductImage('Dragon-Meat', 'IMG/dragon.jpg');
+new ProductImage('Pen-Cutlery', 'IMG/pen.jpg');
+new ProductImage('Pet-Sweep', 'IMG/pet-sweep.jpg');
+new ProductImage('Pizza-Scissors', 'IMG/scissors.jpg');
+new ProductImage('Shark-Sleeping-Bag', 'IMG/shark.jpg');
+new ProductImage('Baby-Sweep', 'IMG/sweep.png');
+new ProductImage('Tauntaun-Sleeping-Bag', 'IMG/tauntaun.jpg');
+new ProductImage('Unicorn-Meat', 'IMG/unicorn.jpg');
+new ProductImage('Tentacle-USB', 'IMG/usb.gif');
+new ProductImage('Self-Watering-Can', 'IMG/water-can.jpg');
+new ProductImage('Misshapen-Wine-Glass', 'IMG/wine-glass.jpg');
 
 setupEventListeners();
 
