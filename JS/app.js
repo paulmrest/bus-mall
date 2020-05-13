@@ -2,9 +2,10 @@
 
 //global variables
 const rootElement = document.getElementById('product-images');
+const canvasElement = document.getElementById('bus-mall-results');
 const imageRootFolder = 'IMG/';
 //static for now...guessing these will be variables later
-const numberOfRounds = 5;
+const numberOfRounds = 25;
 const numberOfImagesPerRound = 3;
 
 var numberOfRoundsPlayed = 0;
@@ -33,7 +34,7 @@ ProductImage.prototype.renderImage = function() {
   //set CSS styling
   newImgEl.style.float = 'left';
   newImgEl.style.margin = 'auto';
-  newImgEl.style.maxWidth = '30%';
+  newImgEl.style.maxWidth = `${98 / numberOfImagesPerRound}%`;
   currentlyRenderedImages.push(this);
   this.views++;
   rootElement.appendChild(newImgEl);
@@ -60,11 +61,14 @@ ProductImage.renderRandomImages = function(numberOfImages) {
     if (numberOfRoundsPlayed >= numberOfRounds)
     {
       rootElement.removeEventListener('click', handleImageClick);
-      ProductImage.displayVotingResults();
+      // ProductImage.displayVotingResults();
+      displayVotingResultsChart(canvasElement);
     }
     else
     {
       var tempProductImagesBuilderArray = ProductImage.allProductImagesExceptLastRound();
+      //after using currentlyRenderedImages to exclude which ProductImages are in the
+      //array we'll be pulling from to render the next round, we clear currentlyRenderedImages
       currentlyRenderedImages = new Array();
       for (var i = 0; i < numberOfImages; i++)
       {
