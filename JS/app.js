@@ -5,7 +5,7 @@ const rootElement = document.getElementById('product-images');
 const canvasElement = document.getElementById('bus-mall-results');
 const imageRootFolder = 'IMG/';
 //static for now...guessing these will be variables later
-const numberOfRounds = 10;
+const numberOfRounds = 25;
 const numberOfImagesPerRound = 3;
 
 var numberOfRoundsPlayed = 0;
