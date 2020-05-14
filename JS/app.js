@@ -5,7 +5,7 @@ const rootElement = document.getElementById('product-images');
 const canvasElement = document.getElementById('bus-mall-results');
 const imageRootFolder = 'IMG/';
 //static for now...guessing these will be variables later
-const numberOfRounds = 25;
+const numberOfRounds = 10;
 const numberOfImagesPerRound = 3;
 
 var numberOfRoundsPlayed = 0;
@@ -18,9 +18,12 @@ var currentlyRenderedImages = new Array();
 function ProductImage(productName, fileName, extension) {
   this.productName = productName;
   this.filePath = ProductImage.buildFilePath(fileName, extension);
-  this.altText = productName.replace(' ', '-');
-  this.votes = 0;
-  this.views = 0;
+  this.altText = productName.replace(/\s+/g, '-');
+  if (!this.retrieveVotesAndViewsFromStorage())
+  {
+    this.votes = 0;
+    this.views = 0;
+  }
   allProductImages.push(this);
 }
 
@@ -37,7 +40,28 @@ ProductImage.prototype.renderImage = function() {
   newImgEl.style.maxWidth = `${98 / numberOfImagesPerRound}%`;
   currentlyRenderedImages.push(this);
   this.views++;
+  this.writeVotesAndViewsToStorage();
   rootElement.appendChild(newImgEl);
+};
+
+ProductImage.prototype.writeVotesAndViewsToStorage = function() {
+  window.localStorage.setItem(this.altText, JSON.stringify(
+    {
+      votes: this.votes,
+      views: this.views
+    }
+  ));
+};
+
+ProductImage.prototype.retrieveVotesAndViewsFromStorage = function() {
+  var votesAndViews = JSON.parse(window.localStorage.getItem(this.altText));
+  if (votesAndViews)
+  {
+    this.votes = votesAndViews.votes;
+    this.views = votesAndViews.views;
+    return true;
+  }
+  return false;
 };
 
 //class methods
@@ -129,6 +153,7 @@ function handleImageClick(event) {
     if (currentlyRenderedImages[i].altText === clickedImageHTMLTitle)
     {
       currentlyRenderedImages[i].votes++;
+      currentlyRenderedImages[i].writeVotesAndViewsToStorage();
       numberOfRoundsPlayed++;
       ProductImage.renderRandomImages(numberOfImagesPerRound);
       break;
