@@ -85,7 +85,8 @@ ProductImage.renderRandomImages = function(numberOfImages) {
     if (numberOfRoundsPlayed >= numberOfRounds)
     {
       rootElement.removeEventListener('click', handleImageClick);
-      // ProductImage.displayVotingResults();
+      //removes all CSS from the HTML element
+      rootElement.style.all = 'unset';
       displayVotingResultsChart(canvasElement);
     }
     else
@@ -193,5 +194,6 @@ new ProductImage('Self Watering Can', 'water-can', 'jpg');
 new ProductImage('Misshapen Wine Glass', 'wine-glass', 'jpg');
 
 setupEventListeners();
+document.getElementById('rounds-voting').innerText = numberOfRounds;
 
 ProductImage.renderRandomImages(numberOfImagesPerRound);

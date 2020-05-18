@@ -1,4 +1,7 @@
+'use strict';
+
 function displayVotingResultsChart(canvasElement) {
+  Chart.defaults.global.defaultFontFamily = '\'Mitr\', sans-serif';
   var renderingCtx = canvasElement.getContext('2d');
   var busMallVotingChart = new Chart(renderingCtx, {
     type: 'horizontalBar',
